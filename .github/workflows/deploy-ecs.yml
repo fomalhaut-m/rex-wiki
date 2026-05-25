@@ -101,19 +101,6 @@ jobs:
             exit 1
           fi
 
-      - name: 🔄 重载Nginx配置
-        run: |
-          ssh root@8.160.183.109 "nginx -s reload"
-
-      - name: ✅ Nginx重载验证
-        run: |
-          if ssh root@8.160.183.109 "ps aux | grep -v grep | grep -q nginx"; then
-            echo "✅ Nginx配置重载成功，服务运行正常"
-          else
-            echo "❌ Nginx配置重载失败，请检查配置"
-            exit 1
-          fi
-
       - name: 🎉 部署完成
         run: |
           echo "============================================="
