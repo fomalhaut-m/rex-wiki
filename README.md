@@ -1,6 +1,6 @@
 # Luke's Wiki
 
-> 个人知识库，基于 MkDocs + Material 主题构建的现代化静态文档网站。
+> 个人知识库，基于 MkDocs + Simple Blog 主题构建的现代化静态文档网站。
 
 [![GitHub Stars](https://img.shields.io/github/stars/fomalhaut-m/wike.svg?style=flat-square)](https://github.com/fomalhaut-m/wike)
 [![GitHub Issues](https://img.shields.io/github/issues/fomalhaut-m/wike.svg?style=flat-square)](https://github.com/fomalhaut-m/wike/issues)
@@ -27,8 +27,8 @@
 | 分类 | 组件 | 版本 |
 |------|------|------|
 | **文档框架** | MkDocs | 1.6+ |
-| **主题** | Material for MkDocs | 9.6+ |
-| **部署** | 阿里云 OSS | - |
+| **主题** | MkDocs Simple Blog | 0.4.1+ |
+| **部署** | 阿里云 ECS | - |
 | **CI/CD** | GitHub Actions | - |
 | **AI 服务** | Minimax API | - |
 
@@ -289,4 +289,4 @@ MIT License - 详见 [LICENSE](LICENSE) 文件
 
 ---
 
-*Built with ❤️ using MkDocs & Material Theme*
+*Built with ❤️ using MkDocs & Simple Blog Theme*
