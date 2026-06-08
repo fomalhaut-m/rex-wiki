@@ -30,7 +30,7 @@ jobs:
           echo "✅ Pip 版本：$(pip --version)"
 
       - name: 📥 安装MkDocs依赖
-        run: pip install mkdocs mkdocs-simple-blog mkdocs-nav-weight pymdown-extensions fontawesome
+        run: pip install --no-cache-dir mkdocs mkdocs-simple-blog mkdocs-nav-weight pymdown-extensions fontawesome
 
       - name: ✅ 依赖安装验证
         run: |
