@@ -3,62 +3,31 @@ site_description: 个人知识沉淀与技术笔记
 site_url: https://wiki.vexrune.top
 
 theme:
+  name: simple-blog
   favicon: assets/favicon.svg
-  name: material
-  language: zh
-  header:
-    title: VexRune Wiki
   logo: assets/favicon.svg
-  site_title: wiki.vexrune.top
-  features:
-    # 导航功能
-    - navigation.tabs           # 顶部标签页
-    - navigation.tabs.sticky    # 固定标签页
-    - navigation.sections       # 导航分组
-    - navigation.expand         # 展开所有导航
-    - navigation.top            # 回到顶部按钮
-    - navigation.instant        # 即时加载页面
-    - navigation.tracking       # 地址栏追踪锚点
-    - navigation.indexes        # 分组主页
-    # 搜索功能
-    - search.highlight          # 搜索高亮
-    - search.share              # 搜索分享
-    - search.suggest           # 搜索建议
-    # 内容功能
-    - content.tabs.link         # 内容标签页链接
-    - content.code.copy         # 代码复制按钮
-    - content.code.annotate     # 代码注释
-    - content.action.edit       # 编辑此页
-    - content.action.view       # 查看源码
-    # 头部功能
-    - header.autohide           # 滚动时自动隐藏头部
-    # 表格功能
-    - content.table             # 表格排序
-    - toc.integrate            # 可选：目录整合
-
-  palette:
-    # 深色模式 - 黑灰色调
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: black
-      accent: grey
-      toggle:
-        icon: material/brightness-4
-        name: 切换至浅色模式
-    # 浅色模式
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: grey
-      accent: white
-      toggle:
-        icon: material/brightness-7
-        name: 切换至深色模式
-
-  icon:
-    repo: fontawesome/brands/github
-    edit: material/pencil
-    view: material/eye
-    favicon: assets/favicon.svg
+  theme_style: light
+  sidebar: true
+  navigation_depth: 3
+  highlightjs: true
+  colors:
+    text: black
+    title: black
+    primary: black
+    background: white
+  components:
+    site_name: true
+    title: true
+    menu: true
+    preview: true
+    footer: true
+  hljs_languages:
+    - java
+    - python
+    - yaml
+    - javascript
+    - sql
+    - xml
 
 strict: false
 
@@ -113,6 +82,12 @@ plugins:
       headless_included: false
       # 默认页面权重值，用于未指定权重值的页面。
       default_page_weight: 0
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/darkmode.js
 
 extra:
   social:

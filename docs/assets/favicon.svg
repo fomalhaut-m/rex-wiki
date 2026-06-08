@@ -8,12 +8,12 @@
       <stop offset="100%" stop-color="#7C3AED"/>
     </linearGradient>
     
-    <linearGradient id="glow" x1="0%" y1="0%" x2="0%" y2="100%">
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#C4B5FD"/>
       <stop offset="100%" stop-color="#8B5CF6"/>
     </linearGradient>
     
-    <filter id="glow">
+    <filter id="glowFilter">
       <feGaussianBlur stdDeviation="5" result="blur"/>
       <feMerge>
         <feMergeNode in="blur"/>
@@ -27,17 +27,17 @@
   <!-- 硬朗V形主体 -->
   <path d="M25 35 L100 165 L175 35" 
         fill="none" stroke="url(#vGrad)" stroke-width="16" 
-        stroke-linecap="butt" stroke-linejoin="miter" filter="url(#glow)"/>
+        stroke-linecap="butt" stroke-linejoin="miter" filter="url(#glowFilter)"/>
   
   <!-- V内部高光线 -->
   <path d="M30 40 L100 160 L170 40" 
-        fill="none" stroke="url(#glow)" stroke-width="5" 
+        fill="none" stroke="url(#glowGrad)" stroke-width="5" 
         stroke-linecap="square" stroke-linejoin="miter" opacity="0.5"/>
   
   <!-- 顶部横线 -->
   <path d="M15 35 L185 35" 
         stroke="url(#vGrad)" stroke-width="3" 
-        stroke-linecap="square" filter="url(#glow)"/>
+        stroke-linecap="square" filter="url(#glowFilter)"/>
   
   <!-- 斜切装饰 -->
   <path d="M20 30 L35 45" stroke="#C4B5FD" stroke-width="2" stroke-linecap="round"/>
