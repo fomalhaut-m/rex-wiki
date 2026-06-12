@@ -182,7 +182,15 @@ jobs:
           echo "📦 本地文件数量：$(find site -type f | wc -l)"
           echo "📦 本地目录大小：$(du -sh site | cut -f1)"
           echo "📦 上传开始时间：$(date '+%H:%M:%S')"
-          rsync -avz --progress --stats -e "ssh -o StrictHostKeyChecking=no" site/ root@8.160.183.109:/app/vex-wiki/
+          echo "📦 打包 site 目录..."
+          tar -czf site.tar.gz site/
+          echo "📦 压缩包大小：$(du -sh site.tar.gz | cut -f1)"
+          echo "📦 上传压缩包..."
+          scp -o StrictHostKeyChecking=no site.tar.gz root@8.160.183.109:/tmp/
+          echo "📦 解压到目标目录..."
+          ssh root@8.160.183.109 "cd /app/vex-wiki && tar -xzf /tmp/site.tar.gz --strip-components=1 && rm -f /tmp/site.tar.gz"
+          echo "📦 删除本地压缩包..."
+          rm -f site.tar.gz
           echo "📦 上传完成时间：$(date '+%H:%M:%S')"
           echo "============================================="
 
