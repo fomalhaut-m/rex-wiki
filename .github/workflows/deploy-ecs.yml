@@ -16,8 +16,15 @@ jobs:
 
       - name: ✅ 代码拉取验证
         run: |
-          echo "✅ 代码拉取成功，当前分支：$(git rev-parse --abbrev-ref HEAD)"
+          echo "============================================="
+          echo "📦 代码拉取验证"
+          echo "============================================="
+          echo "✅ 当前分支：$(git rev-parse --abbrev-ref HEAD)"
           echo "✅ 最新提交：$(git log -1 --pretty=format:'%s')"
+          echo "✅ 提交时间：$(git log -1 --pretty=format:'%ci')"
+          echo "✅ 提交者：$(git log -1 --pretty=format:'%an')"
+          echo "✅ 仓库大小：$(du -sh .git | cut -f1)"
+          echo "============================================="
 
       - name: 🐍 配置Python环境
         uses: actions/setup-python@v5
@@ -26,21 +33,49 @@ jobs:
 
       - name: ✅ Python环境验证
         run: |
+          echo "============================================="
+          echo "🐍 Python环境验证"
+          echo "============================================="
           echo "✅ Python 版本：$(python --version)"
           echo "✅ Pip 版本：$(pip --version)"
+          echo "✅ 已安装包数量：$(pip list | wc -l)"
+          echo "============================================="
 
       - name: 📥 安装MkDocs依赖
-        run: pip install --no-cache-dir mkdocs mkdocs-simple-blog mkdocs-nav-weight pymdown-extensions fontawesome
+        run: |
+          echo "============================================="
+          echo "📥 安装MkDocs依赖"
+          echo "============================================="
+          echo "📦 开始安装时间：$(date '+%H:%M:%S')"
+          pip install --no-cache-dir mkdocs mkdocs-simple-blog mkdocs-nav-weight pymdown-extensions fontawesome
+          echo "📦 安装完成时间：$(date '+%H:%M:%S')"
+          echo "============================================="
 
       - name: ✅ 依赖安装验证
         run: |
+          echo "============================================="
+          echo "✅ 依赖安装验证"
+          echo "============================================="
           echo "✅ MkDocs 版本：$(mkdocs --version)"
+          echo "✅ 已安装包列表："
+          pip list | grep -E "mkdocs|pymdown|fontawesome"
+          echo "============================================="
 
       - name: 🏗️ 构建静态网站
-        run: mkdocs build
+        run: |
+          echo "============================================="
+          echo "🏗️ 构建静态网站"
+          echo "============================================="
+          echo "📦 开始构建时间：$(date '+%H:%M:%S')"
+          mkdocs build --verbose
+          echo "📦 构建完成时间：$(date '+%H:%M:%S')"
+          echo "============================================="
 
       - name: ✅ 构建产物验证
         run: |
+          echo "============================================="
+          echo "✅ 构建产物验证"
+          echo "============================================="
           if [ ! -d "site" ]; then
             echo "❌ 构建失败：site目录不存在"
             exit 1
@@ -49,69 +84,146 @@ jobs:
             echo "❌ 构建失败：index.html不存在"
             exit 1
           fi
-          echo "✅ 构建成功，site目录大小：$(du -sh site | cut -f1)"
-          echo "✅ 包含文件数：$(find site -type f | wc -l)"
+          echo "✅ 构建成功"
+          echo "✅ site目录大小：$(du -sh site | cut -f1)"
+          echo "✅ 文件总数：$(find site -type f | wc -l)"
+          echo "✅ 目录总数：$(find site -type d | wc -l)"
+          echo ""
+          echo "📁 目录结构："
           ls -la site/
+          echo ""
+          echo "📊 文件类型统计："
+          find site -type f -name "*.html" | wc -l | xargs echo "  HTML文件："
+          find site -type f -name "*.css" | wc -l | xargs echo "  CSS文件："
+          find site -type f -name "*.js" | wc -l | xargs echo "  JS文件："
+          find site -type f -name "*.png" | wc -l | xargs echo "  PNG图片："
+          find site -type f -name "*.jpg" | wc -l | xargs echo "  JPG图片："
+          find site -type f -name "*.svg" | wc -l | xargs echo "  SVG图片："
+          echo "============================================="
 
       - name: 🔑 配置SSH连接密钥
         run: |
+          echo "============================================="
+          echo "🔑 配置SSH连接密钥"
+          echo "============================================="
+          echo "📦 开始配置时间：$(date '+%H:%M:%S')"
           mkdir -p ~/.ssh/
           echo "${{ secrets.ALIYUN_ECS_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 8.160.183.109 >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
+          echo "✅ SSH密钥配置完成"
+          echo "✅ 配置完成时间：$(date '+%H:%M:%S')"
+          echo "============================================="
 
       - name: ✅ SSH连接验证
         run: |
+          echo "============================================="
+          echo "✅ SSH连接验证"
+          echo "============================================="
+          echo "📦 开始验证时间：$(date '+%H:%M:%S')"
           if ssh -o ConnectTimeout=10 root@8.160.183.109 "echo '连接成功'"; then
             echo "✅ SSH连接服务器成功"
             echo "✅ 服务器系统：$(ssh root@8.160.183.109 "cat /etc/os-release | grep PRETTY_NAME | cut -d'\"' -f2")"
+            echo "✅ 服务器时间：$(ssh root@8.160.183.109 "date '+%Y-%m-%d %H:%M:%S'")"
+            echo "✅ 服务器磁盘：$(ssh root@8.160.183.109 "df -h / | tail -1 | awk '{print $3\"/\"$2\" (\"$5\"已使用)\"}'")"
           else
             echo "❌ SSH连接服务器失败，请检查密钥和网络配置"
             exit 1
           fi
+          echo "✅ 验证完成时间：$(date '+%H:%M:%S')"
+          echo "============================================="
 
       - name: 📂 初始化服务器部署目录
         run: |
+          echo "============================================="
+          echo "📂 初始化服务器部署目录"
+          echo "============================================="
+          echo "📦 开始初始化时间：$(date '+%H:%M:%S')"
+          echo "📦 目标路径：/app/vex-wiki"
           ssh root@8.160.183.109 "mkdir -p /app/vex-wiki && chown -R root:root /app/vex-wiki && chmod -R 755 /app/vex-wiki"
+          echo "✅ 初始化完成时间：$(date '+%H:%M:%S')"
+          echo "============================================="
 
       - name: ✅ 部署目录验证
         run: |
+          echo "============================================="
+          echo "✅ 部署目录验证"
+          echo "============================================="
           if ssh root@8.160.183.109 "[ -d /app/vex-wiki ]"; then
-            echo "✅ 部署目录 /app/vex-wiki 已存在且权限正常"
+            echo "✅ 部署目录 /app/vex-wiki 已存在"
+            echo "✅ 目录权限：$(ssh root@8.160.183.109 "stat -c '%a %U:%G' /app/vex-wiki")"
+            echo "✅ 目录大小：$(ssh root@8.160.183.109 "du -sh /app/vex-wiki | cut -f1")"
           else
             echo "❌ 部署目录创建失败"
             exit 1
           fi
+          echo "============================================="
 
-      - name: �️ 清理服务器旧文件
+      - name: 🗑️ 清理服务器旧文件
         run: |
-          echo "🗑️ 删除服务器旧文件..."
+          echo "============================================="
+          echo "🗑️ 清理服务器旧文件"
+          echo "============================================="
+          echo "📦 开始清理时间：$(date '+%H:%M:%S')"
+          echo "📦 清理前文件数量：$(ssh root@8.160.183.109 "find /app/vex-wiki -type f 2>/dev/null | wc -l")"
+          echo "📦 清理前目录大小：$(ssh root@8.160.183.109 "du -sh /app/vex-wiki 2>/dev/null | cut -f1")"
           ssh root@8.160.183.109 "rm -rf /app/vex-wiki/* /app/vex-wiki/.* 2>/dev/null || true"
-          echo "✅ 旧文件已清理完成"
+          echo "📦 清理后文件数量：$(ssh root@8.160.183.109 "find /app/vex-wiki -type f 2>/dev/null | wc -l")"
+          echo "📦 清理后目录大小：$(ssh root@8.160.183.109 "du -sh /app/vex-wiki 2>/dev/null | cut -f1")"
+          echo "✅ 清理完成时间：$(date '+%H:%M:%S')"
+          echo "============================================="
 
-      - name: �📤 上传构建产物到服务器
+      - name: 📤 上传构建产物到服务器
         run: |
-          echo "🚀 开始上传文件..."
-          scp -o StrictHostKeyChecking=no -r site/* root@8.160.183.109:/app/vex-wiki/
+          echo "============================================="
+          echo "� 上传构建产物到服务器"
+          echo "============================================="
+          echo "📦 本地文件数量：$(find site -type f | wc -l)"
+          echo "📦 本地目录大小：$(du -sh site | cut -f1)"
+          echo "📦 上传开始时间：$(date '+%H:%M:%S')"
+          rsync -avz --progress --stats -e "ssh -o StrictHostKeyChecking=no" site/ root@8.160.183.109:/app/vex-wiki/
+          echo "📦 上传完成时间：$(date '+%H:%M:%S')"
+          echo "============================================="
 
       - name: ✅ 文件上传验证
         run: |
+          echo "============================================="
+          echo "✅ 文件上传验证"
+          echo "============================================="
           REMOTE_FILE_COUNT=$(ssh root@8.160.183.109 "find /app/vex-wiki -type f | wc -l")
           LOCAL_FILE_COUNT=$(find site -type f | wc -l)
+          echo "📦 本地文件数量：$LOCAL_FILE_COUNT"
+          echo "📦 远程文件数量：$REMOTE_FILE_COUNT"
+          echo "📦 远程目录大小：$(ssh root@8.160.183.109 "du -sh /app/vex-wiki | cut -f1")"
           if [ "$REMOTE_FILE_COUNT" -eq "$LOCAL_FILE_COUNT" ]; then
             echo "✅ 文件上传完成，共上传 $REMOTE_FILE_COUNT 个文件"
-            echo "✅ 远程目录大小：$(ssh root@8.160.183.109 "du -sh /app/vex-wiki | cut -f1")"
+            echo ""
+            echo "📊 远程文件类型统计："
+            ssh root@8.160.183.109 "find /app/vex-wiki -type f -name '*.html' | wc -l" | xargs echo "  HTML文件："
+            ssh root@8.160.183.109 "find /app/vex-wiki -type f -name '*.css' | wc -l" | xargs echo "  CSS文件："
+            ssh root@8.160.183.109 "find /app/vex-wiki -type f -name '*.js' | wc -l" | xargs echo "  JS文件："
           else
             echo "❌ 文件上传不完整，本地 $LOCAL_FILE_COUNT 个文件，远程只有 $REMOTE_FILE_COUNT 个"
             exit 1
           fi
+          echo "============================================="
 
       - name: 🎉 部署完成
         run: |
           echo "============================================="
-          echo "✅  部署成功！🎉"
+          echo "🎉 部署完成"
+          echo "============================================="
+          echo "✅  部署成功！"
+          echo ""
           echo "🌐  访问地址：http://8.160.183.109"
           echo "🌐  域名访问：http://wiki.vexruna.top"
-          echo "⏰  部署时间：$(date '+%Y-%m-%d %H:%M:%S')"
+          echo ""
+          echo "📦  部署信息："
+          echo "    本地文件数：$(find site -type f | wc -l)"
+          echo "    远程文件数：$(ssh root@8.160.183.109 "find /app/vex-wiki -type f | wc -l")"
+          echo "    本地大小：$(du -sh site | cut -f1)"
+          echo "    远程大小：$(ssh root@8.160.183.109 "du -sh /app/vex-wiki | cut -f1")"
+          echo "    部署时间：$(date '+%Y-%m-%d %H:%M:%S')"
+          echo "    Git提交：$(git log -1 --pretty=format:'%s')"
           echo "============================================="
