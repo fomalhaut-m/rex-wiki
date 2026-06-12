@@ -1,20 +1,14 @@
-site_name: Luke's Wiki
-site_description: 个人知识沉淀与技术笔记
+site_name: Wiki
+site_description: Blog
 site_url: https://wiki.vexrune.top
 
 theme:
   name: simple-blog
   favicon: assets/favicon.svg
-  logo: assets/favicon.svg
   theme_style: light
   sidebar: true
   navigation_depth: 3
   highlightjs: true
-  colors:
-    text: black
-    title: black
-    primary: black
-    background: white
   components:
     site_name: true
     title: true
@@ -32,6 +26,8 @@ theme:
 strict: false
 
 docs_dir: ./docs
+
+extra_dirs: [./public]
 
 site_dir: ./site
 
@@ -86,8 +82,7 @@ plugins:
 extra_css:
   - stylesheets/extra.css
 
-extra_javascript:
-  - javascripts/darkmode.js
+extra_javascript: []
 
 extra:
   social:

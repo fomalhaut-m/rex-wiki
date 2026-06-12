@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="50" height="50">
+  <title>Vex</title>
+  
+  <defs>
+    <linearGradient id="vGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="50%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+    
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#C4B5FD"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    
+    <filter id="glowFilter">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <rect width="200" height="200" fill="none"/>
+  
+  <!-- 硬朗V形主体 -->
+  <path d="M25 35 L100 165 L175 35" 
+        fill="none" stroke="url(#vGrad)" stroke-width="16" 
+        stroke-linecap="butt" stroke-linejoin="miter" filter="url(#glowFilter)"/>
+  
+  <!-- V内部高光线 -->
+  <path d="M30 40 L100 160 L170 40" 
+        fill="none" stroke="url(#glowGrad)" stroke-width="5" 
+        stroke-linecap="square" stroke-linejoin="miter" opacity="0.5"/>
+  
+  <!-- 顶部横线 -->
+  <path d="M15 35 L185 35" 
+        stroke="url(#vGrad)" stroke-width="3" 
+        stroke-linecap="square" filter="url(#glowFilter)"/>
+  
+  <!-- 斜切装饰 -->
+  <path d="M20 30 L35 45" stroke="#C4B5FD" stroke-width="2" stroke-linecap="round"/>
+  <path d="M165 45 L180 30" stroke="#C4B5FD" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- 中心菱形 -->
+  <path d="M100 110 L108 120 L100 130 L92 120 Z" 
+        fill="#8B5CF6" stroke="#C4B5FD" stroke-width="1.5"/>
+  
+  <!-- 装饰线 -->
+  <line x1="60" y1="75" x2="85" y2="100" stroke="#A78BFA" stroke-width="2" stroke-linecap="round"/>
+  <line x1="140" y1="75" x2="115" y2="100" stroke="#A78BFA" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- 光点 -->
+  <circle cx="100" cy="120" r="3" fill="#E9D5FF"/>
+  <circle cx="55" cy="70" r="2.5" fill="#A78BFA"/>
+  <circle cx="145" cy="70" r="2.5" fill="#A78BFA"/>
+</svg>
