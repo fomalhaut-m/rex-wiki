@@ -84,7 +84,13 @@ jobs:
             exit 1
           fi
 
-      - name: 📤 上传构建产物到服务器
+      - name: �️ 清理服务器旧文件
+        run: |
+          echo "🗑️ 删除服务器旧文件..."
+          ssh root@8.160.183.109 "rm -rf /app/vex-wiki/* /app/vex-wiki/.* 2>/dev/null || true"
+          echo "✅ 旧文件已清理完成"
+
+      - name: �📤 上传构建产物到服务器
         run: |
           echo "🚀 开始上传文件..."
           scp -o StrictHostKeyChecking=no -r site/* root@8.160.183.109:/app/vex-wiki/
