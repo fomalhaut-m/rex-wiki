@@ -11,6 +11,5 @@ weight: 60
 
 | 分类 | 说明 |
 |------|------|
-| [clion-stm32-环境搭建](clion-stm32-环境搭建/) | 使用 CLion 进行 STM32 开发的完整环境搭建流程 |
-| [clion-esp32-环境搭建](clion-esp32-环境搭建/) | 使用 CLion 进行 ESP32 开发的完整环境搭建流程 |
+| [clion-环境搭建](clion-环境搭建/) | 使用 CLion 进行嵌入式开发的环境搭建（STM32 + ESP32） |
 | [stm32](stm32/) | STM32 入门、外设教程、通信协议与参考手册 |
