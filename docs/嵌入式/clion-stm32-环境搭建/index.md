@@ -3,7 +3,7 @@ title: clion-stm32-环境搭建
 weight: 10
 ---
 
-# clion-stm32-环境搭建
+# CLion 与 STM32 环境搭建
 
 使用 CLion 进行 STM32 开发的完整环境搭建流程。
 
