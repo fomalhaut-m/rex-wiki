@@ -47,7 +47,7 @@ jobs:
           echo "📥 安装MkDocs依赖"
           echo "============================================="
           echo "📦 开始安装时间：$(date '+%H:%M:%S')"
-          pip install --no-cache-dir mkdocs mkdocs-simple-blog mkdocs-nav-weight pymdown-extensions fontawesome
+          pip install --no-cache-dir mkdocs mkdocs-bootswatch mkdocs-nav-weight pymdown-extensions fontawesome
           echo "📦 安装完成时间：$(date '+%H:%M:%S')"
           echo "============================================="
 

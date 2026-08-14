@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/3D建模/index.md",
+                "file": "docs/创意设计/3D建模/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/3D建模/index.md",
+                "file": "docs/创意设计/3D建模/index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -113,7 +113,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/3D建模/index.md",
+                "file": "docs/创意设计/3D建模/index.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -156,7 +156,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/3D建模/index.md",
+                "file": "docs/创意设计/3D建模/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -185,7 +185,7 @@
   },
   "active": "a0d572cb7f336fb7",
   "lastOpenFiles": [
-    "docs/3D建模/Blender与Ae基础.md",
+    "docs/创意设计/3D建模/Blender与Ae基础.md",
     "public/logo.svg",
     "2026-07-10.md",
     "未命名 1.canvas",
