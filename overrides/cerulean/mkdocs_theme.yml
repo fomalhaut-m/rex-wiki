@@ -1,0 +1,8 @@
+# Config options for 'cerulean' theme
+
+extends: mkdocs
+
+hljs_style: color-brewer
+
+# 社交链接（数据由 mkdocs.yml 的 extra.social 提供，此处仅开启渲染）
+social: !ENV [social, true]
